@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Konfirmasi Pembayaran</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f6f8;
+padding:20px;
+}
+
+.card{
+max-width:500px;
+margin:auto;
+background:#fff;
+border-radius:20px;
+padding:25px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+h2{
+text-align:center;
+margin-bottom:25px;
+color:#222;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 0;
+border-bottom:1px solid #eee;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.label{
+color:#777;
+font-size:14px;
+}
+
+.value{
+font-weight:600;
+color:#222;
+}
+
+.total{
+font-size:18px;
+font-weight:700;
+color:#000;
+}
+
+.free{
+color:#22c55e;
+font-weight:700;
+}
+
+.btn{
+width:100%;
+height:55px;
+border:none;
+border-radius:14px;
+background:#ff6b00;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+margin-top:25px;
+}
+
+.btn:hover{
+opacity:.9;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h2>Konfirmasi Pembayaran</h2>
+
+<div class="row">
+<div class="label">Nomor Tujuan</div>
+<div class="value" id="nomor">-</div>
+</div>
+
+<div class="row">
+<div class="label">Nominal</div>
+<div class="value" id="nominal">Rp0</div>
+</div>
+
+<div class="row">
+<div class="label">Biaya Admin</div>
+<div class="free">GRATIS</div>
+</div>
+
+<div class="row">
+<div class="label total">Total Bayar</div>
+<div class="total" id="total">Rp0</div>
+</div>
+
+<button class="btn" onclick="bayar()">
+Bayar Sekarang
+</button>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const nomor = params.get("nomor") || "-";
+const nominal = parseInt(params.get("nominal")) || 0;
+
+const total = nominal;
+
+document.getElementById("nomor").textContent =
+nomor;
+
+document.getElementById("nominal").textContent =
+"Rp" + nominal.toLocaleString("id-ID");
+
+document.getElementById("total").textContent =
+"Rp" + total.toLocaleString("id-ID");
+
+function bayar(){
+
+window.location.href =
+"bukti.html?nomor=" +
+encodeURIComponent(nomor) +
+"&nominal=" +
+nominal +
+"&total=" +
+total;
+
+}
+
+</script>
+
+</body>
+</html>

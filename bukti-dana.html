@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bukti Transfer DANA</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+}
+
+.header{
+background:#118eea;
+color:#fff;
+padding:18px;
+font-size:22px;
+font-weight:700;
+text-align:center;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+padding:20px;
+}
+
+.success{
+text-align:center;
+margin-top:10px;
+}
+
+.check{
+width:80px;
+height:80px;
+margin:auto;
+border-radius:50%;
+background:#118eea;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.check i{
+color:#fff;
+font-size:38px;
+}
+
+.status{
+margin-top:15px;
+font-size:18px;
+font-weight:600;
+color:#555;
+}
+
+.amount{
+margin-top:10px;
+font-size:42px;
+font-weight:700;
+color:#118eea;
+}
+
+.card{
+background:#fff;
+margin-top:25px;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+padding:18px;
+border-bottom:1px solid #eee;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.label{
+color:#777;
+font-size:14px;
+}
+
+.value{
+font-weight:600;
+text-align:right;
+}
+
+.copy-box{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.copy-btn{
+border:none;
+background:none;
+font-size:18px;
+cursor:pointer;
+color:#118eea;
+}
+
+.btn{
+width:100%;
+height:55px;
+border:none;
+border-radius:14px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+margin-top:15px;
+}
+
+.btn-share{
+background:#fff;
+border:2px solid #118eea;
+color:#118eea;
+}
+
+.btn-done{
+background:#118eea;
+color:#fff;
+}
+
+.toast{
+position:fixed;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+background:#222;
+color:#fff;
+padding:12px 18px;
+border-radius:10px;
+opacity:0;
+visibility:hidden;
+transition:.3s;
+}
+
+.toast.show{
+opacity:1;
+visibility:visible;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="header">
+Bukti Transfer DANA
+</div>
+
+<div class="container">
+
+<div class="success">
+
+<div class="check">
+<i class="fas fa-check"></i>
+</div>
+
+<div class="status">
+Pembayaran Berhasil
+</div>
+
+<div class="amount" id="amount">
+Rp0
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="row">
+<div class="label">Sumber Dana</div>
+<div class="value">DANA</div>
+</div>
+
+<div class="row">
+<div class="label">Nomor Tujuan</div>
+<div class="value" id="nomor">
+-
+</div>
+</div>
+
+<div class="row">
+<div class="label">Jumlah Transfer</div>
+<div class="value" id="jumlahTransfer">
+Rp0
+</div>
+</div>
+
+<div class="row">
+<div class="label">Biaya Admin</div>
+<div class="value">
+Gratis
+</div>
+</div>
+
+<div class="row">
+<div class="label">Total</div>
+<div class="value" id="totalTransfer">
+Rp0
+</div>
+</div>
+
+<div class="row">
+<div class="label">ID Transaksi</div>
+
+<div class="copy-box">
+
+<span id="trxNumber">
+DANA000000
+</span>
+
+<button
+class="copy-btn"
+onclick="copyTransaction()">
+<i class="fa-regular fa-copy"></i>
+</button>
+
+</div>
+
+</div>
+
+<div class="row">
+<div class="label">Tanggal</div>
+<div class="value" id="tanggal"></div>
+</div>
+
+<div class="row">
+<div class="label">Waktu</div>
+<div class="value" id="waktu"></div>
+</div>
+
+</div>
+
+<button
+class="btn btn-share"
+onclick="shareReceipt()">
+<i class="fa-solid fa-share-nodes"></i>
+Bagikan
+</button>
+
+<button
+class="btn btn-done"
+onclick="window.location.href='index.html'">
+Selesai
+</button>
+
+</div>
+
+<div id="toast" class="toast">
+Berhasil disalin
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const nomor =
+params.get("nomor") || "-";
+
+const nominal =
+parseInt(params.get("nominal")) || 0;
+
+document.getElementById("amount").textContent =
+"Rp" + nominal.toLocaleString("id-ID");
+
+document.getElementById("jumlahTransfer").textContent =
+"Rp" + nominal.toLocaleString("id-ID");
+
+document.getElementById("totalTransfer").textContent =
+"Rp" + nominal.toLocaleString("id-ID");
+
+document.getElementById("nomor").textContent =
+nomor;
+
+const trx =
+"DANA" +
+Date.now();
+
+document.getElementById("trxNumber").textContent =
+trx;
+
+const now = new Date();
+
+document.getElementById("tanggal").textContent =
+now.toLocaleDateString("id-ID",{
+day:"2-digit",
+month:"long",
+year:"numeric"
+});
+
+document.getElementById("waktu").textContent =
+now.toLocaleTimeString("id-ID",{
+hour:"2-digit",
+minute:"2-digit"
+}) + " WIB";
+
+function showToast(text){
+
+const toast =
+document.getElementById("toast");
+
+toast.textContent = text;
+
+toast.classList.add("show");
+
+setTimeout(()=>{
+toast.classList.remove("show");
+},2000);
+
+}
+
+function copyTransaction(){
+
+navigator.clipboard.writeText(trx);
+
+showToast(
+"ID Transaksi berhasil disalin"
+);
+
+}
+
+function shareReceipt(){
+
+if(navigator.share){
+
+navigator.share({
+title:"Bukti Transfer DANA",
+text:
+"Transfer berhasil\n" +
+"ID : " + trx + "\n" +
+"Nominal : Rp" +
+nominal.toLocaleString("id-ID")
+});
+
+}else{
+
+showToast(
+"Browser tidak mendukung fitur bagikan"
+);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transfer OVO</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f8f4ff;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+}
+
+.card{
+background:#fff;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+color:#4C3494;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+input,select{
+width:100%;
+height:50px;
+padding:0 15px;
+border:1px solid #ddd;
+border-radius:12px;
+margin-bottom:15px;
+font-size:16px;
+}
+
+.btn{
+width:100%;
+height:55px;
+border:none;
+border-radius:14px;
+background:#4C3494;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Transfer OVO</h2>
+
+<label>Nomor OVO</label>
+
+<input
+type="text"
+id="nomor"
+placeholder="Masukkan nomor OVO">
+
+<label>Pilih Nominal</label>
+
+<select id="nominal">
+<option value="10000">Rp10.000</option>
+<option value="20000">Rp20.000</option>
+<option value="50000">Rp50.000</option>
+<option value="100000">Rp100.000</option>
+<option value="200000">Rp200.000</option>
+<option value="500000">Rp500.000</option>
+</select>
+
+<button class="btn" onclick="lanjut()">
+Lanjutkan
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function lanjut(){
+
+const nomor =
+document.getElementById("nomor").value;
+
+const nominal =
+document.getElementById("nominal").value;
+
+if(nomor==""){
+alert("Masukkan nomor OVO");
+return;
+}
+
+window.location.href =
+"bukti-ovo.html?nomor=" +
+encodeURIComponent(nomor) +
+"&nominal=" +
+nominal;
+
+}
+
+</script>
+
+</body>
+</html>

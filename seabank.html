@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Top Up SeaBank</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f6f8;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+}
+
+.card{
+background:#fff;
+padding:20px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+h2{
+margin-bottom:20px;
+text-align:center;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+input[type=text]{
+width:100%;
+height:50px;
+padding:0 15px;
+border:1px solid #ddd;
+border-radius:12px;
+margin-bottom:20px;
+font-size:16px;
+}
+
+.nominal-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:10px;
+}
+
+.nominal-item{
+position:relative;
+}
+
+.nominal-item input{
+display:none;
+}
+
+.nominal-item label{
+display:flex;
+justify-content:center;
+align-items:center;
+height:55px;
+border:2px solid #ddd;
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+background:#fff;
+}
+
+.nominal-item input:checked + label{
+border-color:#00a86b;
+background:#e8fff5;
+color:#00a86b;
+}
+
+.btn{
+width:100%;
+height:55px;
+border:none;
+border-radius:14px;
+background:#00a86b;
+color:#fff;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+margin-top:20px;
+}
+
+.btn:hover{
+opacity:.9;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Top Up SeaBank</h2>
+
+<label>Nomor Tujuan</label>
+
+<input
+type="text"
+id="nomor"
+placeholder="Masukkan nomor tujuan">
+
+<label>Pilih Nominal</label>
+
+<div class="nominal-grid">
+
+<div class="nominal-item">
+<input type="radio" name="nominal" id="n1" value="10000">
+<label for="n1">Rp10.000</label>
+</div>
+
+<div class="nominal-item">
+<input type="radio" name="nominal" id="n2" value="20000">
+<label for="n2">Rp20.000</label>
+</div>
+
+<div class="nominal-item">
+<input type="radio" name="nominal" id="n3" value="50000">
+<label for="n3">Rp50.000</label>
+</div>
+
+<div class="nominal-item">
+<input type="radio" name="nominal" id="n4" value="100000">
+<label for="n4">Rp100.000</label>
+</div>
+
+<div class="nominal-item">
+<input type="radio" name="nominal" id="n5" value="200000">
+<label for="n5">Rp200.000</label>
+</div>
+
+<div class="nominal-item">
+<input type="radio" name="nominal" id="n6" value="500000">
+<label for="n6">Rp500.000</label>
+</div>
+
+</div>
+
+<button class="btn" onclick="lanjut()">
+Lanjut
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function lanjut(){
+
+const nomor =
+document.getElementById("nomor").value.trim();
+
+const nominalTerpilih =
+document.querySelector(
+'input[name="nominal"]:checked'
+);
+
+if(nomor === ""){
+alert("Masukkan nomor tujuan");
+return;
+}
+
+if(!nominalTerpilih){
+alert("Pilih nominal terlebih dahulu");
+return;
+}
+
+const nominal =
+nominalTerpilih.value;
+
+window.location.href =
+"bukti-seabank.html?nomor=" +
+encodeURIComponent(nomor) +
+"&nominal=" +
+nominal +
+"&total=" +
+nominal;
+
+}
+
+</script>
+
+</body>
+</html>

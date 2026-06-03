@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Top Up DANA</title>
+
+<style>
+body{
+    font-family:Segoe UI;
+    background:#f5f5f5;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+h2{
+    margin-bottom:20px;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    background:#108ee9;
+    color:white;
+    border-radius:10px;
+    cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h2>Top Up DANA</h2>
+
+<input
+type="text"
+id="nomor"
+placeholder="Masukkan Nomor DANA">
+
+<select id="nominal">
+    <option value="10000">Rp10.000</option>
+    <option value="20000">Rp20.000</option>
+    <option value="50000">Rp50.000</option>
+    <option value="100000">Rp100.000</option>
+    <option value="200000">Rp200.000</option>
+</select>
+
+<button onclick="lanjutkan()">
+Lanjutkan
+</button>
+
+</div>
+
+<script>
+
+function lanjutkan(){
+
+const nomor =
+document.getElementById("nomor").value.trim();
+
+const nominal =
+document.getElementById("nominal").value;
+
+if(nomor==""){
+    alert("Masukkan nomor tujuan");
+    return;
+}
+
+window.location.href =
+"bukti-dana.html?nomor=" +
+encodeURIComponent(nomor) +
+"&nominal=" +
+nominal +
+"&total=" +
+nominal;
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Bukti Transfer GoPay</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#eefbf6;
+}
+
+.header{
+background:#00AA5B;
+color:white;
+padding:18px;
+text-align:center;
+font-size:22px;
+font-weight:700;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+padding:20px;
+}
+
+.success{
+text-align:center;
+margin-top:15px;
+}
+
+.check{
+width:80px;
+height:80px;
+margin:auto;
+border-radius:50%;
+background:#00AA5B;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.check i{
+font-size:38px;
+color:white;
+}
+
+.status{
+margin-top:15px;
+font-size:18px;
+font-weight:600;
+color:#555;
+}
+
+.amount{
+margin-top:10px;
+font-size:42px;
+font-weight:700;
+color:#00AA5B;
+}
+
+.card{
+background:white;
+margin-top:25px;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+padding:18px;
+border-bottom:1px solid #eee;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.label{
+color:#777;
+}
+
+.value{
+font-weight:600;
+text-align:right;
+}
+
+.btn{
+width:100%;
+height:55px;
+border:none;
+border-radius:14px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+margin-top:15px;
+}
+
+.btn-share{
+background:white;
+border:2px solid #00AA5B;
+color:#00AA5B;
+}
+
+.btn-done{
+background:#00AA5B;
+color:white;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+Bukti Transfer GoPay
+</div>
+
+<div class="container">
+
+<div class="success">
+
+<div class="check">
+<i class="fas fa-check"></i>
+</div>
+
+<div class="status">
+Transfer Berhasil
+</div>
+
+<div class="amount" id="amount">
+Rp0
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="row">
+<div class="label">Sumber Dana</div>
+<div class="value">GoPay</div>
+</div>
+
+<div class="row">
+<div class="label">Nomor Tujuan</div>
+<div class="value" id="nomor">-</div>
+</div>
+
+<div class="row">
+<div class="label">Jumlah Transfer</div>
+<div class="value" id="jumlahTransfer">Rp0</div>
+</div>
+
+<div class="row">
+<div class="label">Biaya Admin</div>
+<div class="value">Gratis</div>
+</div>
+
+<div class="row">
+<div class="label">Total</div>
+<div class="value" id="totalTransfer">Rp0</div>
+</div>
+
+<div class="row">
+<div class="label">ID Transaksi</div>
+<div class="value" id="trxNumber"></div>
+</div>
+
+</div>
+
+<button class="btn btn-share">
+Bagikan
+</button>
+
+<button class="btn btn-done"
+onclick="window.location.href='index.html'">
+Selesai
+</button>
+
+</div>
+
+<script>
+
+const params=new URLSearchParams(window.location.search);
+
+const nomor=params.get("nomor")||"-";
+const nominal=parseInt(params.get("nominal"))||0;
+
+document.getElementById("nomor").textContent=nomor;
+
+document.getElementById("amount").textContent=
+"Rp"+nominal.toLocaleString("id-ID");
+
+document.getElementById("jumlahTransfer").textContent=
+"Rp"+nominal.toLocaleString("id-ID");
+
+document.getElementById("totalTransfer").textContent=
+"Rp"+nominal.toLocaleString("id-ID");
+
+document.getElementById("trxNumber").textContent=
+"GP"+Date.now();
+
+</script>
+
+</body>
+</html>

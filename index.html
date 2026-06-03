@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PPOB Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+<body>
+
+<header class="header">
+
+    <div class="topbar">
+        <i class="fa-solid fa-bars"></i>
+        <h2>Pasar Kuota</h2>
+    </div>
+
+</header>
+
+<div class="card-menu">
+
+    <div class="menu-item">
+        <i class="fa-solid fa-wallet"></i>
+        <span>Rp 17.589</span>
+    </div>
+
+    <div class="menu-item">
+        <i class="fa-solid fa-credit-card"></i>
+        <span>Deposit</span>
+    </div>
+
+    <div class="menu-item">
+        <i class="fa-solid fa-bell"></i>
+        <span>Notif</span>
+    </div>
+
+</div>
+
+<div class="banner">
+    <img src="https://picsum.photos/800/250" alt="">
+</div>
+
+<section class="section">
+
+    <h3>Kategori</h3>
+
+    <div class="grid">
+
+        <div class="item">
+            <div class="icon">
+                <i class="fa-solid fa-mobile-screen"></i>
+            </div>
+            <p>Pulsa</p>
+        </div>
+
+        <div class="item" onclick="openTopup()">
+            <div class="icon">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+            </div>
+            <p>Top Up</p>
+        </div>
+
+        <div class="item">
+            <div class="icon">
+                <i class="fa-solid fa-wifi"></i>
+            </div>
+            <p>Kuota</p>
+        </div>
+
+        <div class="item">
+            <div class="icon">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <p>PLN</p>
+        </div>
+
+        <div class="item">
+            <div class="icon">
+                <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <p>Game</p>
+        </div>
+
+        <div class="item">
+            <div class="icon">
+                <i class="fa-solid fa-droplet"></i>
+            </div>
+            <p>PDAM</p>
+        </div>
+
+        <div class="item">
+            <div class="icon">
+                <i class="fa-solid fa-ticket"></i>
+            </div>
+            <p>Tiket</p>
+        </div>
+
+        <div class="item">
+            <div class="icon">
+                <i class="fa-solid fa-file-invoice"></i>
+            </div>
+            <p>Tagihan</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MODAL TOPUP -->
+
+<div id="topupModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <h3>Pilih E-Wallet</h3>
+            <span onclick="closeTopup()">✕</span>
+        </div>
+
+        <button onclick="location.href='dana.html'">
+            DANA
+        </button>
+
+        <button onclick="location.href='gopay.html'">
+            GoPay
+        </button>
+
+        <button onclick="location.href='seabank.html'">
+            SeaBank
+        </button>
+
+        <button onclick="location.href='ovo.html'">
+            OVO
+        </button>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
