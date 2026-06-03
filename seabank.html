@@ -112,7 +112,8 @@ opacity:.9;
 
 <h2>Top Up SeaBank</h2>
 
-<label>Nomor Tujuan</label>
+
+<input type="text" id="nama" placeholder="Masukkan nama penerima">
 
 <input
 type="text"
@@ -170,13 +171,19 @@ function lanjut(){
 const nomor =
 document.getElementById("nomor").value.trim();
 
+const nama =
+document.getElementById("nama").value.trim();
+
 const nominalTerpilih =
-document.querySelector(
-'input[name="nominal"]:checked'
-);
+document.querySelector('input[name="nominal"]:checked');
 
 if(nomor === ""){
 alert("Masukkan nomor tujuan");
+return;
+}
+
+if(nama === ""){
+alert("Masukkan nama penerima");
 return;
 }
 
@@ -185,19 +192,18 @@ alert("Pilih nominal terlebih dahulu");
 return;
 }
 
-const nominal =
-nominalTerpilih.value;
+const nominal = nominalTerpilih.value;
 
 window.location.href =
 "bukti-seabank.html?nomor=" +
 encodeURIComponent(nomor) +
+"&nama=" +
+encodeURIComponent(nama) +
 "&nominal=" +
 nominal +
 "&total=" +
 nominal;
-
 }
-
 </script>
 
 </body>
