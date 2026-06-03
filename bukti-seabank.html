@@ -257,14 +257,14 @@ body{
                 <div class="user-name-row">
                     <img src="pp.png" class="logo">
                     <div class="user-name">
-                        kurniawan
+                        kurniawan 
                     </div>
                 </div>
 
                 <div class="user-info-row">
                     <img src="seabank.png" class="logo-small">
-                    <div class="user-info" id="nomorTujuan">
-                        901735434887
+                    <div class="user-info">
+                        901832684887
                     </div>
                 </div>
 
@@ -272,26 +272,25 @@ body{
         </div>
 
         <div class="row">
-            <div class="label">Ke</div>
+    <div class="label">Ke</div>
 
-            <div class="value">
+    <div class="value">
 
-                <div class="user-name-row">
-                    <img src="assets/pp.png" class="logo">
-                    <div class="user-name" id="receiverName">
-                        -
-                    </div>
-                </div>
-
-                <div class="user-info-row">
-                    
-                    <div class="user-info">
-                        5678 9010 1234
-                    </div>
-                </div>
-
+        <div class="user-name-row">
+            <img src="pp.png" class="logo">
+            <div class="user-name" id="receiverName">
+                -
             </div>
         </div>
+
+        <div class="user-info-row">
+            <div class="user-info" id="nomorTujuan">
+                5678 9010 1234
+            </div>
+        </div>
+
+    </div>
+</div>
 
         <div class="row">
             <div class="label">Jumlah Transfer</div>
@@ -342,12 +341,12 @@ body{
 
         <div class="row">
             <div class="label">Tanggal</div>
-            <div class="price">04 Juni 2026</div>
+            <div class="price" id="tanggal"></div>
         </div>
 
         <div class="row">
             <div class="label">Waktu</div>
-            <div class="price">22:30 WIB</div>
+            <div class="price" id="waktu"></div>
         </div>
 
     </div>
@@ -376,136 +375,104 @@ body{
 // =======================
 // AMBIL DATA DARI URL
 // =======================
-
 const params = new URLSearchParams(window.location.search);
 
 const nomor = params.get("nomor") || "-";
+const nama = params.get("nama") || "-";   // ✅ taruh di sini
 const nominal = parseInt(params.get("nominal")) || 0;
 const total = parseInt(params.get("total")) || nominal;
 
-// Isi nominal besar di atas
+// =======================
+// TAMPILKAN DATA USER
+// =======================
+document.getElementById("receiverName").textContent = nama;
+document.getElementById("nomorTujuan").textContent = nomor;
+
+// =======================
+// WAKTU & TANGGAL
+// =======================
+const now = new Date();
+
+const tanggal = now.toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+});
+
+const waktu = now.toLocaleTimeString("id-ID", {
+    hour: "2-digit",
+    minute: "2-digit"
+}) + " WIB";
+
+document.getElementById("tanggal").textContent = tanggal;
+document.getElementById("waktu").textContent = waktu;
+
+// =======================
+// NOMINAL
+// =======================
 document.getElementById("amount").textContent =
 "Rp" + nominal.toLocaleString("id-ID");
 
-// Isi jumlah transfer
 document.getElementById("jumlahTransfer").textContent =
 "Rp" + nominal.toLocaleString("id-ID");
 
-// Isi jumlah total
 document.getElementById("transferAmount").textContent =
 "Rp" + total.toLocaleString("id-ID");
 
-// Isi nomor tujuan
-const nomorTujuan =
-document.querySelector(".user-info");
-
-if(nomorTujuan){
-    nomorTujuan.textContent = nomor;
-}
-
-// Generate nomor transaksi otomatis
+// =======================
+// TRX NUMBER
+// =======================
 document.getElementById("trxNumber").textContent =
-"SB" +
-Date.now() +
-Math.floor(Math.random()*1000);
-
-// Generate tanggal otomatis
-const now = new Date();
-
-const tanggal =
-now.toLocaleDateString("id-ID",{
-    day:"2-digit",
-    month:"long",
-    year:"numeric"
-});
-
-const waktu =
-now.toLocaleTimeString("id-ID",{
-    hour:"2-digit",
-    minute:"2-digit"
-}) + " WIB";
+"SB" + Date.now() + Math.floor(Math.random() * 1000);
 
 // =======================
 // TOAST
 // =======================
-
 function showToast(text){
-
-    const toast =
-    document.getElementById("toast");
-
+    const toast = document.getElementById("toast");
     toast.innerText = text;
-
     toast.classList.add("show");
 
     setTimeout(() => {
         toast.classList.remove("show");
     }, 2000);
-
 }
 
 // =======================
 // COPY
 // =======================
-
 function copyTransaction(){
+    const trx = document.getElementById("trxNumber").innerText.trim();
 
-    const trx =
-    document.getElementById("trxNumber").innerText.trim();
-
-    navigator.clipboard.writeText(trx)
-    .then(() => {
-
-        showToast(
-            "✓ Nomor transaksi berhasil disalin"
-        );
-
+    navigator.clipboard.writeText(trx).then(() => {
+        showToast("✓ Nomor transaksi berhasil disalin");
     });
-
 }
 
 // =======================
 // SHARE
 // =======================
-
 function shareReceipt(){
-
-    const trx =
-    document.getElementById("trxNumber").innerText;
+    const trx = document.getElementById("trxNumber").innerText;
 
     if(navigator.share){
-
         navigator.share({
-
-            title:"Bukti Transfer",
-
+            title: "Bukti Transfer",
             text:
-            "Transfer berhasil\n" +
-            "No Transaksi : " + trx + "\n" +
-            "Nominal : Rp" +
-            nominal.toLocaleString("id-ID")
-
+                "Transfer berhasil\n" +
+                "No Transaksi : " + trx + "\n" +
+                "Nominal : Rp" + nominal.toLocaleString("id-ID")
         });
-
-    }else{
-
-        showToast(
-            "Browser tidak mendukung fitur bagikan"
-        );
-
+    } else {
+        showToast("Browser tidak mendukung fitur bagikan");
     }
-
 }
 
 // =======================
 // SELESAI
 // =======================
-
 function finishTransaction(){
-
-    window.location.href =
-    "index.html";
-
+    window.location.href = "index.html";
 }
 
 </script>
