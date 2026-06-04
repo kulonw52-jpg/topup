@@ -51,6 +51,11 @@ button{
 
 <input
 type="text"
+id="nama"
+placeholder="Nama penerima (opsional)">
+
+<input
+type="text"
 id="nomor"
 placeholder="Masukkan Nomor DANA">
 
@@ -72,6 +77,9 @@ Lanjutkan
 
 function lanjutkan(){
 
+const nama =
+document.getElementById("nama").value.trim() || "User DANA";
+
 const nomor =
 document.getElementById("nomor").value.trim();
 
@@ -84,13 +92,14 @@ if(nomor==""){
 }
 
 window.location.href =
-"bukti-dana.html?nomor=" +
+"bukti-dana.html?nama=" +
+encodeURIComponent(nama) +
+"&nomor=" +
 encodeURIComponent(nomor) +
 "&nominal=" +
 nominal +
 "&total=" +
 nominal;
-
 }
 
 </script>
